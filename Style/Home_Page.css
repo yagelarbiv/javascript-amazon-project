@@ -1,0 +1,16 @@
+.Items-Grid{
+  display: flex;
+  flex-direction: column;
+  flex: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.product-image-container{
+  height: 250px;
+  width: 100px;
+  border-radius: 1px;
+  border-color: black;
+  background-color: blue;
+}
+.product-image{
+  height: 100px;
+  width: 100px;
+}
