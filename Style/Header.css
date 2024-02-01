@@ -1,0 +1,121 @@
+Header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55px;
+  z-index: 100;
+}
+
+.center-header{
+  flex: 5;
+  margin-left: 20px;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+}
+.searchbar{
+  flex: 1;
+  height: 36px;
+  width: 800;
+  padding-left: 10px;
+  font-size: 16px;
+  border: 1px solid rgb(194, 194, 194);
+  box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.05);
+  border-radius: 2px;
+}
+.search-button{
+  height: 40px;
+  width: 50px;
+  border-left: -1px;
+  margin-right: 10px;
+  border: 1px solid rgb(194, 194, 194);
+  border-radius: 2px;
+  background-color: rgb(245, 245, 245);
+  position: relative;
+}
+.searchbar::placeholder{
+  font-size: 16px;
+}
+.search-icon{
+  width: 24px;
+}
+.logo-link .logo{
+  padding-top: 5px;
+  width: 90px;
+  margin-top: 5px;
+}
+
+.left-header:hover{
+  border-radius: 1px;
+  border-color: white;
+}
+
+.left-header{
+  flex: 2;
+  max-width:120px ;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#header .right-section {
+  flex: 2;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: end;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.right-header .orders-link {
+  color: white;
+}
+
+.right-header .cart-link {
+  color: white;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.right-header .orders-text {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.right-header .returns-text {
+  display: block;
+  font-size: 13px;
+}
+
+.right-header .cart-quantity {
+  color: rgb(240, 136, 4);
+  font-size: 16px;
+  font-weight: 700;
+  position: absolute;
+  top: 4px;
+  left: 22px;
+  width: 26px;
+  text-align: center;
+}
+
+.right-header .cart-icon{
+  width: 50px;
+}
+.right-header .header-link {
+  display: inline-block;
+  padding: 6px;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.right-header .cart-text{
+  display: inline-block;
+}

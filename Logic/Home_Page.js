@@ -1,10 +1,13 @@
-import { AddItemToCart } from Orders.js;
-const Items =  [
+// import { AddItemToCart } from '../Logic/Orders.js';
+// import { Cart } from '../Logic/Orders.js';
+var Items =  [
   {
     name: "athletic cotton socks 6 pairs",
     image: "../Images/Item-Image/athletic-cotton-socks-6-pairs.jpg",
     rating: "../Images/Rating-Images/rating-45.png",
+    count:   87,
     price: "10.90$",
+    CheckMark: "../Images/checkmark.png",
     color:[
   
     ],
@@ -13,15 +16,18 @@ const Items =  [
     ],
     style:[
   
-    ],size:[
+    ],
+    size:[
   
     ],
   },
   {
     name: "intermediate composite basketball",
     image: "../Images/Item-Image/intermediate-composite-basketball.jpg",
-    rating: "",
-    price: "",
+    rating: "../Images/Rating-Images/rating-4.png",
+    count:   127,
+    price: "20.95$",
+    CheckMark: "../Images/checkmark.png",
     color:[
   
     ],
@@ -30,15 +36,18 @@ const Items =  [
     ],
     style:[
   
-    ],size:[
+    ],
+    size:[
   
     ],
   },
   {
-    name: "",
-    image: "",
-    rating: "",
-    price: "",
+    name: "knit athletic sneakers grays",
+    image: "../Images/Item-Image/knit-athletic-sneakers-gray.jpg",
+    rating: "../Images/Rating-Images/rating-4.png",
+    count:   89,
+    price: "$33.90",
+    CheckMark: "../Images/checkmark.png",
     color:[
   
     ],
@@ -47,49 +56,87 @@ const Items =  [
     ],
     style:[
   
-    ],size:[
+    ],
+    size:[
+      5,
+      6,
+      7, 
+      8,
+      9
+    ],
+  },
+  {
+    name: "Liquid Laundry Detergent, 110 Loads, 82.5 Fl Oz",
+    image: "../Images/Item-Image/liquid-laundry-detergent-lavender.jpg",
+    rating: "../Images/Rating-Images/rating-45.png",
+    count:   305,
+    price: "$28.99",
+    CheckMark: "../Images/checkmark.png",
+    color:[
+  
+    ],
+    set:[
+  
+    ],
+    style:[
+      "Plain",
+      "Lavender"
+    ],
+    size:[
   
     ],
   },
   {
-    name: "",
-    image: "",
-    rating: "",
-    price: "",
+    name: "Luxury Towel Set - Graphite Gray",
+    image: "../Images/Item-Image/luxury-tower-set-4-piece.jpg",
+    rating: "../Images/Rating-Images/rating-45.png",
+    count:   144,
+    price: "35.99$",
+    CheckMark: "../Images/checkmark.png",
     color:[
   
     ],
     set:[
-  
+      "4-pieces",
+      "6-pieces"
     ],
     style:[
   
-    ],size:[
+    ],
+    size:[
   
     ],
   },
   {
-    name: "",
-    image: "",
-    rating: "",
-    price: "",
+    name: "Plain Hooded Fleece Sweatshirt",
+    image: "../Images/Item-Image/plain-hooded-fleece-sweatshirt-teal.jpg",
+    rating: "../Images/Rating-Images/rating-45.png",
+    count:   87,
+    price: "10.90$",
+    CheckMark: "../Images/checkmark.png",
     color:[
-  
+      "yellow",
+      "teal"
     ],
     set:[
   
     ],
     style:[
   
-    ],size:[
-  
+    ],
+    size:[
+      "S",
+      "M",
+      "L"
     ],
   },
   {
-    name: "",
-    image: "",
-    rating: "",
-    price: "",
+    name: "athletic cotton socks 6 pairs",
+    image: "../Images/Item-Image/athletic-cotton-socks-6-pairs.jpg",
+    rating: "../Images/Rating-Images/rating-45.png",
+    count:   87,
+    price: "10.90$",
+    CheckMark: "../Images/checkmark.png",
     color:[
   
     ],
@@ -98,207 +145,119 @@ const Items =  [
     ],
     style:[
   
-    ],size:[
+    ],
+    size:[
   
     ],
   },
 ]
 
-const LeftSelector = () =>{
-  const LeftHeader = document.createElement('section');
-  LeftHeader.classList.add('Left-Header');
-  Header.appendChild(LeftHeader);
-  const ImageLogo = document.createElement('a');
-  ImageLogo.classList.add('Image-Logo');
-  ImageLogo.href = "Amazon.com";
-  LeftHeader.appendChild(ImageLogo);
-}
-
-const CenterSelector = () => {
-  const CenterHeader = document.createElement('section');
-  CenterHeader.classList.add('Center-Header');
-  Header.appendChild(CenterHeader);
-  const SearchBox = document.createElement('input');
-  SearchBox.classList.add('SearchBox');
-  CenterHeader.appendChild(SearchBox);
-  const SearchButton = document.createElement('button');
-  SearchButton.classList.add('SearchButton');
-  SearchButton.innerHTML = "Search";
-  CenterHeader.appendChild(SearchButton);
-}
-
-const RightSelector = () => {
-  const RightHeader = document.createElement('section');
-  RightHeader.classList.add('Right-Header');
-  Header.appendChild(RightHeader);
-  const Cart = document.createElement('a');
-  Cart.classList.add('cart-link');
-  Cart.href = "Cart";
-  RightHeader.appendChild(Cart);
-  const CartIcon = document.createElement('img');
-  CartIcon.classList.add('cart-icon');
-  CartIcon.src = "../Images/cart.png";
-  Cart.appendChild(CartIcon);
-  const CartQuantity = document.createElement('div');
-  CartQuantity.classList.add('js-cart-quantity');
-  CartQuantity.classList.add('cart-quantity');
-  Cart.appendChild(CartQuantity);
-  const OrdersLink = document.createElement('a');
-  OrdersLink.classList.add('orders-link');
-  OrdersLink.href = "orders.html";
-  RightHeader.appendChild(OrdersLink);
-  const ReturnsText = document.createElement('span');
-  ReturnsText.classList.add('returns-text');
-  OrdersLink.appendChild(ReturnsText);
-  const OrdersText = document.createElement('span');
-  OrdersText.classList.add('orders-text');
-  OrdersLink.appendChild(OrdersText);
-}
-
 const HeaderBuilder = () => {
-  const Body = document.querySelector('body');
-  const Header = document.querySelector('header');
-  Body.appendChild(Header);
-  LeftSelector();
-  CenterSelector();
-  RightSelector();
-}
+  const HeaderComponent = `
+    <section class="left-header">
+      <a class="logo-link" href="https://www.amazon.com/">
+        <img class="logo" src="../Images/Icons/amazon-logo-white.png" alt="Amazon-Logo">
+      </a>
+    </section>
 
-const ImageDiv = (item, Item) => {
-  const div = document.createElement('div')
-  div.className = 'product-image-container';
-  item.appendChild(div);
-  const Image = document.createElement('img');
-  Image.className = 'product-image js-product-image';
-  Image.setAttribute('alt', Item.name);
-  Image.src = Item.image;
-  div.appendChild(Image);
-}
+    <section class="center-header">
+      <input type="text" name="Searchbar" placeholder="Search" class="searchbar">
+      <button class="search-button"><img class="search-icon" src="../Images/Icons/search-icon.png"></button>
+    </section>
 
-const NameDivAndRating = (item, Item) =>{
-  let name = document.createElement('div');
-  name.className = 'product-name limit-to-2-lines';
-  name.innerHTML = Item.name;
-  item.appendChild(name);
-  let rating = document.createElement('div');
-  rating.className = 'product-rating-container';
-  item.appendChild(rating);
-  let stars = document.createElement('img');
-  stars.className = 'product-rating-stars';
-  stars.src = Item.rating;
-  rating.appendChild(stars);
-  let count = document.createElement('div');
-  count.className = 'product-rating-count link-primary';
-  count.innerHTML = Item.count;
-  rating.appendChild(count);
-}
+    <section class="right-header">
+    <a class="orders-link header-link" href="orders">
+      <span class="returns-text">Returns</span>
+      <span class="orders-text">&amp; Orders</span>
+    </a>
 
-const PriceAndQuantity = (item, Item) =>{
-  let price = document.createElement('div');
-  price.className = 'product-price';
-  price.innerHTML = Item.price;
-  item.appendChild(price);
-  let quantity = document.createElement('div');
-  quantity.className = 'product-quantity-container';
-  item.appendChild(quantity);
-  let selector = document.createElement('input');
-  selector.className = 'js-quantity-selector';
-  selector.type = 'number';
-  selector.max = '10';
-  selector.min = '1';
-  quantity.appendChild(selector);
-}
-
-const formSubmit = (item, Item) => {
-  const Form = document.createElement('form');
-  Form.className = 'js-add-to-cart-button';
-  Form.method = 'POST';
-  Form.id = 'js-add-to-cart';
-  item.appendChild(Form);
-  let button = document.createElement('button');
-  button.className = 'js-add-to-cart-button add-to-cart-button button-primary';
-  button.innerHTML = 'Add to cart';
-  button.Id = Item.name;
-  button.type = 'submit';
-  Form.appendChild(button);
-}
-
-const Color = (item, Color) => {
-  const colordiv = document.createElement('div');
-  colordiv.className = 'color';
-  item.appendChild(colordiv);
-  const colorchoice = document.createElement('div');
-  colorchoice.className = 'js-variation-options-container variation-options-container';
-  item.appendChild(colorchoice);
-  Color.forEach(color => {
-    const colorbtn = document.createElement('button');
-    colorbtn.className = 'js-variation-option variation-option js-selected-variation is-selected';
-    colorbtn.innerHTML = color;
-    item.appendChild(colorbtn);
-    })
-};
-
-const set = (item, set) => {
-
-}
-
-const Size = (item, set) => {
-
-}
-
-const Style = (item, style) => {
-
+    <a class="cart-link header-link" href="checkout">
+      <img class="cart-icon" src="../Images/Icons/cart-icon.png">
+      <div class="js-cart-quantity cart-quantity">
+      </div>
+      <div class="cart-text">Cart</div>
+    </a>
+  </section>
+    `
+  document.getElementById("header").innerHTML = HeaderComponent
 }
 
 const MainBuilder = () => {
-  const Main = document.querySelector('main');
-  Body.appendChild(Main);
-  const ItemGrid = document.createElement('Section');
-  Main.classList.add('Item-Grid');
-  const item = document.createElement('Section');
-  item.classList.add('Items');
-  ItemGrid.appendChild(item);
   Items.forEach((Item) => {
-    ImageDiv(item, Item);
-    NameDivAndRating(item, Item);
-    PriceAndQuantity(item, Item);
-    formSubmit(item, Item);
-    if(Item.color !== null) {
-      Color(item, Item.color);
-      
-    }
-    if(Item.set !== null) {
-      Item.set.forEach(set => {
-        set(item, set);
-      });
-    }
-    if(Item.size !== null) {
-      Item.size.forEach(size => {
-        size(item, size);
-      });
-    }
-    if(Item.style !== null) {
-      Item.style.forEach(style => {
-        Style(item, style);
-      });
-    }
+    var Component = `
+      <section class="product-container" >
+        <div class="product-image-container">
+          <img class="product-image" src="${Item.image}" data-testid="product-image">
+        </div>
+          <div class="product-name">
+          ${Item.name}
+          </div>
+          <div class="product-rating-container">
+            <img class="product-rating-stars" src="${Item.rating}">
+            <div class="product-rating-count">
+            ${Item.count}
+            </div>
+          </div>
+          <div class="product-price">
+          ${Item.price}
+          </div>
+          <div class="product-quantity-container">
+            <select name="Quantity" class="js-quantity-selector">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+          <div class="product-spacer"></div>
+          <div class="added-to-cart-message">
+            <img src="../Images/Icons/checkmark.png" class="added-to-cart-icon">
+          </div>`
+          Component += ObjectsList(Item)
+          Component += `<button class="js-add-to-cart-button
+          add-to-cart-button button-primary" type="submit">
+          Add to Cart
+        </button>
+      </section>
+    `;
+    document.querySelector(".Item-grid").innerHTML += Component;
+
   });
 }
+
+const ObjectsList = (Item) => {
+  let componentHtml = '<div class="product-objects-list">';
+  if (Item.color.length !== 0) {
+    componentHtml += '<label class="color-label">Color:</label>';
+    componentHtml += Item.color.map(color => `<button class="js-size-selector" type="submit">${color}</button>`).join('');
+  }
+  if (Item.set.length !== 0) {
+    componentHtml += '<label class="set-label">Set:</label>';
+    componentHtml += Item.set.map(set => `<button class="js-size-selector" type="submit">${set}</button>`).join('');
+  }
+  if (Item.size.length !== 0) {
+    componentHtml += '<label class="size-label">Size:</label>';
+    componentHtml += Item.size.map(size => `<button class="js-size-selector" type="submit">${size}</button>`).join('');
+  }
+  if (Item.style.length !== 0) {
+    componentHtml += '<label class="style-label">Style:</label>';
+    componentHtml += Item.style.map(style => `<button class="js-size-selector" type="submit">${style}</button>`).join('');
+  }
+  componentHtml += '</div>';
+  return componentHtml;
+}
+
 const Start = () => {
   HeaderBuilder();
   MainBuilder();
 }
 
-document.addEventListener("DOMContentLoaded", (event) => {
-  console.log("DOM fully loaded and parsed");
-  const form = document.getElementById(".js-add-to-cart");
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    let ItemId = document.getElementsByClassName("js-add-to-cart-button add-to-cart-button button-primary").Id;
-    let Item = Getelement(ItemId);
-    AddItemToCart(Item);
-  });
-});
 
 const Getelement = (id) => {
   Items.forEach(item => {
@@ -306,4 +265,8 @@ const Getelement = (id) => {
   });
 }
 
-Start();
+document.addEventListener('DOMContentLoaded', (event) => {
+  event.preventDefault();
+  Start();
+  
+});
