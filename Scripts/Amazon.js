@@ -1,4 +1,3 @@
-
 let component = '';
 products.forEach(product => {
   component += ` 
@@ -46,9 +45,27 @@ products.forEach(product => {
       Added
     </div>
 
-    <button class="add-to-cart-button button-primary">
+    <button class="add-to-cart-button button-primary js-add-to-cart"
+    data-product-id="${product.id}"
+    data-product-image="${product.image}"
+    data-product-price="${product.priceCents}"
+    data-product-name="${product.name}">
       Add to Cart
     </button>
   </div>`
 })
 document.querySelector(".products-grid").innerHTML = component;
+
+document.querySelectorAll(".js-add-to-cart")
+.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    const product = {
+      id: button.dataset.productId,
+      image: button.dataset.productImage,
+      priceCents: button.dataset.productPrice,
+      name: button.dataset.productName,
+      quantity: 1
+    };
+    cart.push(product);
+  })
+});
