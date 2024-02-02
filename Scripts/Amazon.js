@@ -1,3 +1,6 @@
+import {cart} from '../data/cart.js';
+import {products} from '../data/products.js';
+
 let component = '';
 products.forEach(product => {
   component += ` 
@@ -40,7 +43,7 @@ products.forEach(product => {
 
     <div class="product-spacer"></div>
 
-    <div class="added-to-cart-${product.id}">
+    <div class="added-to-cart">
       <img src="../images/icons/checkmark.png">
       Added
     </div>
