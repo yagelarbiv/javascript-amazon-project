@@ -70,7 +70,7 @@ document.querySelectorAll(".js-add-to-cart")
       name: button.dataset.productName,
       quantity: quantity
     };
-    addToCart(Product);
+    addToCart(Product, quantity);
     updateCartQuantity();
 
   })
