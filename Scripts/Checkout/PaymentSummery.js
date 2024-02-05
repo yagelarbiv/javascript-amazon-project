@@ -16,13 +16,17 @@ export function renderpaymentsummery() {
   const taxcents = totalBeforeTax * 0.1
   const totalcents = totalBeforeTax + taxcents
 
+  let cartQuantity = 0;
+  cart.forEach((cartItem) => {
+    cartQuantity += cartItem.quantity;
+  });
   const paymentSummeryHTML = `
       <div class="payment-summary-title">
         Order Summary
       </div>
 
       <div class="payment-summary-row">
-        <div class="payment-summary-items">Items (3):</div>
+        <div class="payment-summary-items">Items (${cartQuantity}):</div>
         <div class="payment-summary-money">
           ${formatcurrency(totalBeforeTax)}
         </div>
