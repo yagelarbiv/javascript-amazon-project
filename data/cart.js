@@ -40,7 +40,7 @@ export function updateQuantity(productId, newQuantity) {
 }
   
 export function addToCart(Product, quantity) {
-      let matchingitem;
+  let matchingitem;
   cart.forEach(product => {
     if (Product.id === product.id) {
       matchingitem = product;
@@ -72,5 +72,16 @@ export function removeFromCart(productid) {
   });
 
   cart = newcart;
+  saveToStorage();
+}
+
+export function updateDeliveryOption(productId, deliveryOptionId) {
+  let matchingitem;
+  cart.forEach(product => {
+    if (productId === product.id) {
+      matchingitem = product;
+    }
+  });
+  matchingitem.DeliveryOptionsId = deliveryOptionId;
   saveToStorage();
 }
