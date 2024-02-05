@@ -55,7 +55,7 @@ export function addToCart(Product, quantity) {
     }
   } else {
     cart.push({
-      productId: matchingitem.id,
+      productId: Product.id,
       quantity: 1,
       DeliveryOptionsId: '1'
     });

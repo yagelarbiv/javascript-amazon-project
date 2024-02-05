@@ -2,33 +2,24 @@ import {cart, removeFromCart,
   calculateCartQuantity, 
   updateQuantity, 
   updateDeliveryOption} from '../../data/cart.js';
-import {products} from "../../data/products.js";
+import {GetProduct} from "../../data/products.js";
 import {formatcurrency} from "../Utils/money.js";
-import {DeliveryOptions} from "../../data/DeliveryOptions.js";
+import {DeliveryOptions, getDeliveryOptions} from "../../data/DeliveryOptions.js";
+import {renderpaymentsummery} from "./PaymentSummery.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
 export function renderOrderSummary() {
     let component = '';
     cart.forEach((cartItem) => {
     const productid = cartItem.id; 
-    let matchingproducts;
-    products.forEach(product => {
-      if (productid === product.id) {
-        matchingproducts = product;
-      }
-    })
-
+    const matchingproducts = GetProduct(productid);
+    
     const DeliveryOptionsId = cartItem.DeliveryOptionsId
-    let deliveryOptions;
-    DeliveryOptions.forEach(delivery => {
-      if(delivery.Id === DeliveryOptionsId) {
-        deliveryOptions = delivery
-      }
-    });
+    const deliveryOptions = getDeliveryOptions(DeliveryOptionsId);
+
     const today = dayjs();
     const deliverydate = today.add(deliveryOptions.DeliveryDays, 'days');
     const datestring = deliverydate.format("dddd, MMMM D")
-
 
     component += `<div class="cart-item-container js-cart-item-container-${matchingproducts.id}">
     <div class="delivery-date">
@@ -130,13 +121,12 @@ export function renderOrderSummary() {
         renderOrderSummary();
       })
     })
-  }
+}
   
   function updateCartQuantity() {
   const cartQuantity = calculateCartQuantity();
   document.querySelector('.js-return-to-home-link')
   .innerHTML = `${cartQuantity} items`;
-  document.querySelector('.payment-summary-items').innerHTML = `items (${cartQuantity})`;
 }
 
 function deliveryOptionHTML(matchingproducts, cartItem) {
