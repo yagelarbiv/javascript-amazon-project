@@ -19,7 +19,7 @@ export const DeliveryOptions = [
 ]
 
 export function getDeliveryOptions(DeliveryOptionsId) {
-  let deliveryOptions;
+  let deliveryOptions = {};
   DeliveryOptions.forEach(delivery => {
     if(delivery.Id === DeliveryOptionsId) {
       deliveryOptions = delivery

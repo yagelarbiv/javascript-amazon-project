@@ -8,6 +8,16 @@ export function GetProduct(productid) {
   return matchingproducts
 }
 
+export function GetProductbyImage(productImage) {
+  let matchingproducts;
+  products.forEach(product => {
+    if (productImage === product.image) {
+      matchingproducts = product;
+    }
+  })
+  return matchingproducts
+}
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",

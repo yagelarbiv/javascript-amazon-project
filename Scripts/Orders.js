@@ -1,7 +1,9 @@
 import {Orders} from "../data/OrdersModel.js";
 import {formatcurrency} from "./Utils/money.js";
-import {GetProductItem,calculateCartQuantity} from '../data/cart.js'
+import {GetProductItem} from '../data/cart.js'
+import { GetProduct, GetProductbyImage } from "../data/products.js";
 import {getDeliveryOptions} from "../../data/DeliveryOptions.js";
+import {addTotrack} from '../data/track.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
 export function renderOrderCheckout() {
@@ -32,33 +34,48 @@ export function renderOrderCheckout() {
       })
     })
     orderCheckout += `</section>`
-    const orderGrid = document.getElementsByClassName('orders-grid')
-    orderGrid.innerHTML = orderCheckout;
-    document.getElementsByClassName("cart-quantity").innerHTML = calculateCartQuantity();
+    return orderCheckout;
 }
 
+document.addEventListener('DOMContentLoaded',() =>{
+  const orderGrid = document.querySelector('.grid');
+  orderGrid.innerHTML = renderOrderCheckout();
 
+  document.querySelectorAll('.track-package-button').forEach((button) => {
+    button.addEventListener("click", (event) => {
+      localStorage.removeItem('Track');
+      const itemtrack = GetProductbyImage(button.dataset.productImage);
+      let trackItem = {
+        id: itemtrack.id,
+        image: itemtrack.image,
+      }
+      addTotrack(trackItem);
+      window.location.href = './tracking.html';
+    })
+  })
+})
 
 function renderOrderCheckoutItem(Item) {
-  let orderCheckout = '';
   const MatchingItem = GetProductItem(Item.ItemId);
-
+  const product = GetProduct(MatchingItem.id);
+  
   const DeliveryOptionsId = MatchingItem.DeliveryOptionsId;
-  const deliveryOptions = getDeliveryOptions(DeliveryOptionsId);
+  const deliveryOption = getDeliveryOptions(DeliveryOptionsId); 
 
   const today = dayjs();
-  const deliverydate = today.add(deliveryOptions.delivaryDays, 'days');
+  const deliverydate = today.add(deliveryOption.DeliveryDays, 'days'); 
   const datestring = deliverydate.format("dddd, MMMM D");
 
+  let orderCheckout = '';
   orderCheckout = `
         <div class="order-details-grid">
           <div class="product-image-container">
-            <img src="${MatchingItem.image}">
+            <img src="${product.image}">
           </div>
           
           <div class="product-details">
             <div class="product-name">
-              ${MatchingItem.name}
+              ${product.name}
             </div>
             <div class="product-delivery-date">
               Arriving on: ${datestring}
@@ -74,7 +91,10 @@ function renderOrderCheckoutItem(Item) {
           
           <div class="product-actions">
             <a href="tracking.html">
-              <button class="track-package-button button-secondary">
+              <button class="track-package-button button-secondary
+              data-product-id="${product.id}"
+              data-product-image="${product.image}"
+              >
                 Track package
               </button>
             </a>
