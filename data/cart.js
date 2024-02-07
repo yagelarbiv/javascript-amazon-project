@@ -27,43 +27,53 @@ export function updateQuantity(productId, newQuantity) {
   
 export function addToCart(Product, quantity) {
   let matchingitem;
-  cart.forEach(product => {
-    if (Product.id === product.id) {
-      matchingitem = product;
-    }
-  });
-  if (matchingitem) {
-    if(quantity > 1) {
-      matchingitem.quantity += quantity;
-    }
-    else{
-      matchingitem.quantity += 1;
-    }
-  } else {
+  if(!cart) {
+    cart = [];
     cart.push({
       id: Product.id,
       quantity: 1,
       DeliveryOptionsId: '1'
     });
-    const checkmarkElement = document.querySelector(`.js-added-to-cart-${Product.id}`);
-
-    if (checkmarkElement) {
-      checkmarkElement.style.opacity = 1;
-
-      const intervalId = setInterval(() => {
-        let opacity = parseFloat(checkmarkElement.style.opacity);
-        
-        if (opacity === 0) {
-          opacity = 1;
-        } else {
-          opacity = 0;
-          clearInterval(intervalId);
-        }
-
-        checkmarkElement.style.opacity = opacity;
-      }, 1500);
-    } 
     saveToStorage();
+  }
+  else{
+    cart.forEach((product) => {
+      if (Product.id === product.id) {
+        matchingitem = product;
+      }
+    });
+    if (matchingitem) {
+      if(quantity > 1) {
+        matchingitem.quantity += quantity;
+      }
+      else{
+        matchingitem.quantity += 1;
+      }
+    } else {
+      cart.push({
+        id: Product.id,
+        quantity: 1,
+        DeliveryOptionsId: '1'
+      });
+      const checkmarkElement = document.querySelector(`.js-added-to-cart-${Product.id}`);
+      if (checkmarkElement) {
+        checkmarkElement.style.opacity = 1;
+
+        const intervalId = setInterval(() => {
+          let opacity = parseFloat(checkmarkElement.style.opacity);
+          
+          if (opacity === 0) {
+            opacity = 1;
+          } else {
+            opacity = 0;
+            clearInterval(intervalId);
+          }
+
+          checkmarkElement.style.opacity = opacity;
+        }, 1500);
+      } 
+      saveToStorage();
+    }
   }
 }
 
@@ -88,4 +98,14 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
   });
   matchingitem.DeliveryOptionsId = deliveryOptionId;
   saveToStorage();
+}
+
+export function GetProductItem(productid) {
+  let matchingproducts;
+  cart.forEach(cartItem => {
+    if (productid === cartItem.id) {
+      matchingproducts = cartItem;
+    }
+  })
+  return matchingproducts
 }

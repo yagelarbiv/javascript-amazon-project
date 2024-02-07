@@ -1,8 +1,7 @@
-import {cart, removeFromCart, 
-  calculateCartQuantity, 
+import {cart, removeFromCart,
   updateQuantity, 
   updateDeliveryOption} from '../../data/cart.js';
-  import {renderCheckoutHeader} from './checkoutheader.js'
+import {renderCheckoutHeader} from './checkoutheader.js'
 import {GetProduct} from "../../data/products.js";
 import {formatcurrency} from "../Utils/money.js";
 import {DeliveryOptions, getDeliveryOptions} from "../../data/DeliveryOptions.js";
@@ -155,3 +154,4 @@ function deliveryOptionHTML(matchingproducts, cartItem) {
   
   return Html;
 }
+

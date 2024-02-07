@@ -2,7 +2,11 @@ import {cart} from '../../data/cart.js'
 import {GetProduct} from "../../data/products.js";
 import {getDeliveryOptions} from "../../data/DeliveryOptions.js";
 import {formatcurrency} from "../Utils/money.js";
+import { addToOrder } from '../../data/OrdersModel.js';
+import {renderOrderCheckout} from '../Orders.js'
+import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
+var id = 1;
 export function renderpaymentsummery() {
   let productPriceCents = 0;
   let shippingPriceCents = 0;
@@ -64,5 +68,28 @@ export function renderpaymentsummery() {
         Place your order
       </button>
   `;
+  const Items = [
+    {
+      ItemId: 0,
+      DeliveryOptionsId: 0,
+    }
+  ]
+  cart.forEach((cart) => {
+    Items.push({
+      ItemId: cart.id,
+      DeliveryOptionsId: cart.DeliveryOptionsId
+    })
+  });
   document.querySelector('.js-payment-summary').innerHTML = paymentSummeryHTML
+  document.querySelector('.place-order-button').addEventListener('click', () => {
+    const today = dayjs();
+    addToOrder({
+        OrderId: id++,
+        OrderDate: today.format("dddd, MMMM D"),
+        OrderTotalCents: totalcents,
+        OrderItemsId: Items
+    });
+    renderOrderCheckout()
+    window.location.href = '../../orders.html';
+  })
 }
