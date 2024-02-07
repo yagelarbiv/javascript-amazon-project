@@ -4,6 +4,7 @@ import {formatcurrency} from "./Utils/money.js";
 
 let component = '';
 products.forEach(product => {
+  document.querySelector(".cart-quantity").innerHTML = calculateCartQuantity();
   component += ` 
     <div class="product-container">
     <div class="product-image-container">
